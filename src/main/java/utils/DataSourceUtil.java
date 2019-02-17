@@ -21,15 +21,10 @@ public class DataSourceUtil {
 	private static LinkedList<Connection> connectionList = new LinkedList<>();
 	static{
 		try {
-			// 1.Í¨¹ýµ±Ç°Àà»ñÈ¡Àà¼ÓÔØÆ÷
 			ClassLoader classLoader = DataSourceUtil.class.getClassLoader();
-			// 2.Í¨¹ýÀà¼ÓÔØÆ÷µÄ·½·¨»ñµÃÒ»¸öÊäÈëÁ÷
 			InputStream is = classLoader.getResourceAsStream("db.properties");
-			// 3.´´½¨Ò»¸öproperties¶ÔÏó
 			Properties props = new Properties();
-			// 4.¼ÓÔØÊäÈëÁ÷
 			props.load(is);
-			// 5.»ñÈ¡Ïà¹Ø²ÎÊýµÄÖµ
 			driverClass = props.getProperty("driverClass");
 			jdbcUrl = props.getProperty("jdbcUrl");
 			user = props.getProperty("user");
@@ -50,20 +45,18 @@ public class DataSourceUtil {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("Á¬½ÓÊý¾Ý¿âÊ§°Ü£¡");
+				System.out.println("è¿žæŽ¥é”™è¯¯ï¼");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("¼ÓÔØÇý¶¯Ê§°Ü£¡");
+			System.out.println("åŠ è½½é©±åŠ¨é”™è¯¯ï¼");
 		}
 		return conn;
 	}
 	
-	//»ñÈ¡Á¬½Ó³ØÖÐµÄÒ»¸öÁ¬½Ó¶ÔÏó
     public static Connection getConnFromPool()
     {
-        //µ±Á¬½Ó³Ø»¹Ã»¿Õ
         if(connectionList.size()>0){
             Connection connection = connectionList.getFirst();
             connectionList.removeFirst();
@@ -71,7 +64,6 @@ public class DataSourceUtil {
             return connection;
         
         }else if(connectionList.size()==0&&currentsize<maxsize){
-            //Á¬½Ó³Ø±»ÄÃ¿Õ£¬ÇÒÁ¬½ÓÊýÃ»ÓÐ´ïµ½ÉÏÏÞ£¬´´½¨ÐÂµÄÁ¬½Ó
             connectionList.addLast(getConnection());
             
             Connection connection = connectionList.getFirst();
@@ -80,10 +72,9 @@ public class DataSourceUtil {
             return connection;        
         }
         
-        throw new RuntimeException("Á¬½ÓÊý´ïµ½ÉÏÏÞ£¬ÇëµÈ´ý!");
+        throw new RuntimeException("è¿žæŽ¥æ± å·²è¶…è¿‡æœ€å¤§è¿žæŽ¥æ•°!");
     }
     
-    //°ÑÓÃÍêµÄÁ¬½Ó·Å»ØÁ¬½Ó³Ø
     public static void releaseConnection(Connection connection)
     {
     	

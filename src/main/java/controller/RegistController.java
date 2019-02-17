@@ -45,20 +45,19 @@ public class RegistController extends HttpServlet {
 			conditions.put(key,(parameterMapEntry.getValue())[0]);
 		}
 		RegistService registService = new RegistServiceImpl();
-		Map<String,Object> resultMap = new HashMap<>();
 		boolean isExisted = registService.findUserName(conditions);
 		if(isExisted == false){			
 			boolean isRegisted = registService.regist(conditions);
-			if(isRegisted!=true){
+			if(isRegisted==false){
 				resultMessage.setFlag(false);
-				resultMessage.setMessage("×¢²áÊ§°Ü£¡");			
+				resultMessage.setMessage("æ³¨å†Œå¤±è´¥ï¼");			
 			}else{
 				resultMessage.setFlag(true);
-				resultMessage.setMessage("×¢²á³É¹¦£¡");		
+				resultMessage.setMessage("æ³¨å†ŒæˆåŠŸï¼");		
 			}
 		}else{
 			resultMessage.setFlag(false);
-			resultMessage.setMessage("´ËÓÃ»§ÃûÒÑ¾­´æÔÚ£¬ÇëĞŞ¸Ä£¡");		
+			resultMessage.setMessage("æ­¤ç”¨æˆ·åå·²è¢«æ³¨å†Œï¼Œè¯·ä¿®æ”¹ï¼");		
 		}
 		String resultString = JSON.toJSONString(resultMessage);
 		out.print(resultString);
