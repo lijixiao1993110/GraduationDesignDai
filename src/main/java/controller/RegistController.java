@@ -58,7 +58,7 @@ public class RegistController extends HttpServlet {
 			}
 		}else{
 			resultMessage.setFlag(false);
-			resultMessage.setMessage("注册失败！");		
+			resultMessage.setMessage("此用户名已经存在，请修改！");		
 		}
 		String resultString = JSON.toJSONString(resultMessage);
 		out.print(resultString);
