@@ -57,6 +57,7 @@ public class RegistController extends HttpServlet {
 		}
 		String resultString = JSON.toJSONString(resultMap);
 		out.print(resultString);
+		out.close();
 	}
 
 	/**
