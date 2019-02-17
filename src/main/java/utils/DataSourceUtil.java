@@ -83,43 +83,10 @@ public class DataSourceUtil {
         throw new RuntimeException("连接数达到上限，请等待!");
     }
     
-    public static void releaseConn(ResultSet rs, Statement stmt, Connection conn) {
-		try {
-			if (rs != null)
-				rs.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try {
-			if (stmt != null)
-				stmt.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try {
-			if (conn != null)
-				conn.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-    
-    
     //把用完的连接放回连接池
-    public static void releaseConnection(ResultSet rs, Statement stmt,Connection connection)
+    public static void releaseConnection(Connection connection)
     {
-    	try {
-			if (rs != null)
-				rs.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try {
-			if (stmt != null)
-				stmt.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+    	
     	try {
     		if (connection != null){		
     			connectionList.addLast(connection);
