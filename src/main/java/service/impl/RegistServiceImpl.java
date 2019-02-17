@@ -16,7 +16,7 @@ public class RegistServiceImpl implements RegistService {
 		// TODO Auto-generated method stub
 		boolean isExisted = false;
 		try {
-			String userName = conditions.get("userName").toString();
+			String userName =conditions.get("userName") == null?"":conditions.get("userName").toString();
 			Connection conn = DataSourceUtil.getConnFromPool();
 			String sql = "select * from user where userName = ?";
 			PreparedStatement pst = conn.prepareStatement(sql);
@@ -36,13 +36,13 @@ public class RegistServiceImpl implements RegistService {
 	public boolean regist(Map<String, Object> conditions) {
 		// TODO Auto-generated method stub
 		boolean isRegisted = false;
-		String userName = conditions.get("userName").toString();
-		String passWord = conditions.get("passWord").toString();
-		String sex = conditions.get("sex").toString();
-		String email = conditions.get("email").toString();
-		String tel = conditions.get("tel").toString();
-		String birth = conditions.get("birth").toString();
-		String isAdimin = conditions.get("isAdimin").toString();
+		String userName = conditions.get("userName") == null?"":conditions.get("userName").toString();
+		String passWord = conditions.get("passWord") == null?"":conditions.get("passWord").toString();
+		String sex = conditions.get("sex") == null?"":conditions.get("sex").toString();
+		String email = conditions.get("email") == null?"":conditions.get("email").toString();
+		String tel = conditions.get("tel") == null?"":conditions.get("tel").toString();
+		String birth = conditions.get("birth") == null?"":conditions.get("birth").toString();
+		String isAdimin = conditions.get("isAdimin") == null?"":conditions.get("isAdimin").toString();
 		Connection conn = DataSourceUtil.getConnFromPool();
 		String sql = "insert into user (userName,passWord,sex,email,tel,birth,isAdimin) value (?,?,?,?,?,?,?) ";
 		try {
