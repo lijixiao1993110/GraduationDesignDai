@@ -60,7 +60,7 @@ public class RegistController extends HttpServlet {
 			resultMessage.setFlag(false);
 			resultMessage.setMessage("×¢²áÊ§°Ü£¡");		
 		}
-		String resultString = JSON.toJSONString(resultMap);
+		String resultString = JSON.toJSONString(resultMessage);
 		out.print(resultString);
 		out.close();
 	}
