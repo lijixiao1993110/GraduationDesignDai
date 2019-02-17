@@ -42,7 +42,7 @@ public class RegistServiceImpl implements RegistService {
 		String email = conditions.get("email") == null?"":conditions.get("email").toString();
 		String tel = conditions.get("tel") == null?"":conditions.get("tel").toString();
 		String birth = conditions.get("birth") == null?"":conditions.get("birth").toString();
-		String isAdimin = conditions.get("isAdimin") == null?"":conditions.get("isAdimin").toString();
+//		String isAdimin = conditions.get("isAdiminn") == null?"":conditions.get("isAdimin").toString();
 		Connection conn = DataSourceUtil.getConnFromPool();
 		String sql = "insert into user (userName,passWord,sex,email,tel,birth,isAdimin) value (?,?,?,?,?,?,?) ";
 		try {
@@ -53,7 +53,7 @@ public class RegistServiceImpl implements RegistService {
 			pst.setString(4, email);
 			pst.setString(5, tel);
 			pst.setString(6, birth);
-			pst.setString(7, isAdimin);
+			pst.setString(7, "0");
 			int executeNum = pst.executeUpdate(sql);
 			if(executeNum>0){
 				isRegisted = true;
