@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
 
+import model.ResultMessage;
 import service.RegistService;
 import service.impl.RegistServiceImpl;
 
@@ -35,6 +36,7 @@ public class RegistController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ResultMessage resultMessage = new ResultMessage();
 		out = response.getWriter();
 		Map<String, String[]> parameterMap = request.getParameterMap();
 		Map<String, Object> conditions = new HashMap<>();
@@ -48,12 +50,15 @@ public class RegistController extends HttpServlet {
 		if(isExisted == false){			
 			boolean isRegisted = registService.regist(conditions);
 			if(isRegisted!=true){
-				resultMap.put("result", "×¢²áÊ§°Ü£¡");				
+				resultMessage.setFlag(false);
+				resultMessage.setMessage("×¢²áÊ§°Ü£¡");			
 			}else{
-				resultMap.put("result", "×¢²á³É¹¦£¡");
+				resultMessage.setFlag(true);
+				resultMessage.setMessage("×¢²á³É¹¦£¡");		
 			}
 		}else{
-			resultMap.put("result", "´ËÓÃ»§ÃûÒÑ±»×¢²á£¬ÇëÐÞ¸Ä£¡");
+			resultMessage.setFlag(false);
+			resultMessage.setMessage("×¢²áÊ§°Ü£¡");		
 		}
 		String resultString = JSON.toJSONString(resultMap);
 		out.print(resultString);
